@@ -1,0 +1,992 @@
+<title>Rebecca Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf1ee;
+    --surface:#fffdfc;
+    --surface-sunk:#f3e4e0;
+    --ink:#2a151f;
+    --ink-muted:#7d5a5f;
+    --lacquer:#8e1f3b;
+    --lacquer-bright:#c23a56;
+    --gold:#b8925a;
+    --taupe:#c9aea8;
+    --border: color-mix(in srgb, var(--taupe) 55%, transparent);
+    --shadow: 0 1px 2px rgba(42,21,31,.06), 0 12px 28px -16px rgba(42,21,31,.28);
+    --radius-s: 10px;
+    --radius-m: 16px;
+    --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', serif;
+    --font-body: 'Work Sans', -apple-system, 'Segoe UI', sans-serif;
+    --maxw: 1180px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1b0e14;
+      --surface:#271420;
+      --surface-sunk:#170b10;
+      --ink:#f6e9e4;
+      --ink-muted:#c79ba0;
+      --lacquer:#e8637c;
+      --lacquer-bright:#ff8a9d;
+      --gold:#d9b37b;
+      --taupe:#5c3944;
+      --border: color-mix(in srgb, var(--taupe) 70%, transparent);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 32px -18px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1b0e14; --surface:#271420; --surface-sunk:#170b10;
+    --ink:#f6e9e4; --ink-muted:#c79ba0;
+    --lacquer:#e8637c; --lacquer-bright:#ff8a9d; --gold:#d9b37b;
+    --taupe:#5c3944; --border: color-mix(in srgb, var(--taupe) 70%, transparent);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 32px -18px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand-word{ font-family:var(--font-display); text-wrap:balance; margin:0; }
+  p{margin:0;}
+  a{color:inherit;}
+  button{font:inherit;color:inherit;}
+  ::selection{ background:var(--lacquer); color:var(--surface); }
+  :focus-visible{ outline:2px solid var(--lacquer); outline-offset:3px; }
+
+  .wrap{ max-width:var(--maxw); margin-inline:auto; padding-inline:20px; }
+  .eyebrow{ font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky; top:0; z-index:40;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding-block:14px;
+  }
+  .brand{ display:flex; flex-direction:column; line-height:1; cursor:pointer; background:none; border:0; padding:0; text-align:left; }
+  .brand-word{ font-size:1.5rem; font-weight:600; letter-spacing:.01em; }
+  .brand-sub{ font-size:.6rem; letter-spacing:.32em; color:var(--ink-muted); margin-top:4px; }
+
+  .main-nav{ display:flex; gap:4px; }
+  .main-nav button{
+    background:none; border:0; padding:10px 14px; border-radius:999px;
+    color:var(--ink-muted); font-weight:500; font-size:.92rem; cursor:pointer;
+    transition:background .18s ease, color .18s ease;
+  }
+  .main-nav button:hover{ background:var(--surface-sunk); color:var(--ink); }
+  .main-nav button[aria-current="page"]{ background:var(--lacquer); color:#fff8f6; }
+
+  .header-actions{ display:flex; align-items:center; gap:8px; }
+  .icon-btn{
+    position:relative; display:grid; place-items:center;
+    width:42px; height:42px; border-radius:999px; border:1px solid var(--border);
+    background:var(--surface); cursor:pointer; transition:transform .15s ease, border-color .15s ease;
+  }
+  .icon-btn:hover{ transform:translateY(-1px); border-color:var(--lacquer); }
+  .icon-btn svg{ width:19px; height:19px; stroke:var(--ink); }
+  .basket-count{
+    position:absolute; top:-4px; right:-4px; min-width:18px; height:18px; padding:0 4px;
+    border-radius:999px; background:var(--lacquer); color:#fff8f6; font-size:.65rem; font-weight:700;
+    display:grid; place-items:center; font-variant-numeric:tabular-nums;
+  }
+  .menu-toggle{ display:none; }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:13px 24px; font-weight:600; font-size:.94rem; cursor:pointer;
+    border-radius:var(--radius-s); border:1px solid transparent; white-space:nowrap;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:active{ transform:scale(.98); }
+  .btn-primary{ background:var(--lacquer); color:#fff8f6; box-shadow:var(--shadow); }
+  .btn-primary:hover{ background:var(--lacquer-bright); }
+  .btn-primary:disabled{ opacity:.45; cursor:not-allowed; box-shadow:none; }
+  .btn-ghost{ background:transparent; border-color:var(--border); color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--lacquer); }
+  .btn-tip{
+    clip-path:polygon(10% 0,90% 0,100% 30%,100% 100%,0 100%,0 30%);
+    border-radius:0;
+  }
+  .btn-block{ width:100%; }
+  .btn-sm{ padding:8px 14px; font-size:.82rem; }
+
+  /* ---------- stage / screens ---------- */
+  #stage{ min-height:60vh; }
+  .screen{ display:none; }
+  .screen.active{ display:block; animation:riseIn .5s ease both; }
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce){ .screen.active{ animation:none; } }
+
+  section.pane{ padding-block:56px; border-bottom:1px solid var(--border); }
+  section.pane:last-child{ border-bottom:0; }
+  .pane-head{ max-width:640px; margin-bottom:32px; }
+  .pane-head h2{ font-size:clamp(1.6rem,3vw,2.2rem); font-weight:600; margin-top:6px; }
+  .pane-head p{ color:var(--ink-muted); margin-top:10px; font-size:1.02rem; }
+
+  /* ---------- home hero ---------- */
+  .hero{ position:relative; padding-block:64px 48px; overflow:hidden; }
+  .swatch-wall{
+    position:absolute; inset:0; display:grid; grid-template-columns:repeat(8,1fr);
+    gap:14px; padding:24px; opacity:.55; pointer-events:none; mask-image:linear-gradient(to bottom, black, transparent 88%);
+  }
+  .swatch-wall span{ aspect-ratio:1; border-radius:50%; box-shadow:inset 0 -6px 10px rgba(0,0,0,.18), inset 0 4px 6px rgba(255,255,255,.35); }
+  .hero-content{ position:relative; max-width:600px; }
+  .hero-content h1{ font-size:clamp(2.4rem,6vw,4.1rem); font-weight:600; line-height:1.02; margin-top:14px; }
+  .hero-content h1 em{ font-style:italic; color:var(--lacquer); }
+  .hero-content p{ margin-top:20px; font-size:1.1rem; color:var(--ink-muted); max-width:46ch; }
+  .hero-ctas{ display:flex; gap:12px; margin-top:30px; flex-wrap:wrap; }
+
+  .feature-strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .feature-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:22px; box-shadow:var(--shadow); }
+  .feature-card .nail-chip{ width:34px; height:46px; margin-bottom:14px; }
+  .feature-card h3{ font-size:1.05rem; font-weight:600; }
+  .feature-card p{ color:var(--ink-muted); font-size:.9rem; margin-top:8px; }
+
+  .quote-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .quote-card{ background:var(--surface-sunk); border-radius:var(--radius-m); padding:24px; }
+  .quote-card p.quote{ font-family:var(--font-display); font-style:italic; font-size:1.08rem; }
+  .quote-card .who{ margin-top:14px; font-size:.82rem; color:var(--ink-muted); font-weight:600; }
+
+  .bio-row{ display:grid; grid-template-columns:1fr 1.4fr; gap:40px; align-items:center; }
+  .bio-frame{ aspect-ratio:4/5; border-radius:var(--radius-m); background:
+      radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--lacquer) 55%, var(--surface)) 0%, transparent 55%),
+      linear-gradient(155deg, var(--lacquer) 0%, var(--gold) 100%); box-shadow:var(--shadow); }
+
+  /* ---------- gallery ---------- */
+  .chip-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px; }
+  .chip{ border:1px solid var(--border); background:var(--surface); padding:8px 16px; border-radius:999px; font-size:.85rem; font-weight:500; cursor:pointer; color:var(--ink-muted); }
+  .chip[aria-pressed="true"]{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+  .gallery-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .design-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+  .design-card .swatch-stage{ background:var(--surface-sunk); display:grid; place-items:center; padding:30px 0; }
+  .design-card .nail-chip{ width:58px; height:78px; }
+  .design-card .info{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .design-card .name{ font-weight:600; }
+  .design-card .meta{ font-size:.8rem; color:var(--ink-muted); }
+  .design-card .row{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .price{ font-family:var(--font-display); font-weight:600; font-size:1.15rem; font-variant-numeric:tabular-nums; }
+
+  /* ---------- nail shapes (shared clip motif) ---------- */
+  .nail-chip{ position:relative; display:block; }
+  .nail-chip .base{ position:absolute; inset:0; }
+  .nail-chip.shape-square .base{ clip-path:url(#nail-square); }
+  .nail-chip.shape-round .base{ clip-path:url(#nail-round); }
+  .nail-chip.shape-oval .base{ clip-path:url(#nail-oval); }
+  .nail-chip.shape-almond .base{ clip-path:url(#nail-almond); }
+  .nail-chip.shape-coffin .base{ clip-path:url(#nail-coffin); }
+  .nail-chip.shape-stiletto .base{ clip-path:url(#nail-stiletto); }
+
+  .finish-glossy .shine{ position:absolute; inset:0; background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.55) 46%, transparent 62%); }
+  .finish-matte .shine{ position:absolute; inset:0; background:radial-gradient(circle at 50% 20%, rgba(0,0,0,0) 40%, rgba(0,0,0,.14) 100%); }
+  .finish-chrome .shine{ position:absolute; inset:0; background:linear-gradient(100deg, rgba(255,255,255,.15), rgba(255,255,255,.75) 20%, rgba(255,255,255,.1) 40%, rgba(0,0,0,.15) 60%, rgba(255,255,255,.6) 80%); background-size:220% 100%; animation:chromeSweep 5s ease-in-out infinite; }
+  .finish-cateye .shine{ position:absolute; inset:0; background:linear-gradient(100deg, transparent 40%, rgba(255,255,255,.75) 48%, transparent 56%); }
+  .finish-glitter .shine{ position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.9) 1px, transparent 1.6px); background-size:7px 9px, 11px 13px; opacity:.55; }
+  .finish-frenchtip .shine{ position:absolute; inset:0; background:linear-gradient(to top, transparent 0%, transparent 74%, #fff8f4 78%, #fff8f4 100%); }
+  @media (prefers-reduced-motion: reduce){ .finish-chrome .shine{ animation:none; } }
+  @keyframes chromeSweep{ 0%,100%{ background-position:0% 0; } 50%{ background-position:100% 0; } }
+
+  .addon-gem{ position:absolute; border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff, var(--gold) 60%, #8a6a34 100%); box-shadow:0 0 4px rgba(0,0,0,.3); }
+  .addon-foil{ position:absolute; inset:0; background:repeating-linear-gradient(120deg, transparent 0 10%, rgba(184,146,90,.55) 11% 13%, transparent 14% 24%); mix-blend-mode:multiply; opacity:.7; }
+
+  /* ---------- account ---------- */
+  .account-shell{ display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden; box-shadow:var(--shadow); max-width:920px; margin-inline:auto; }
+  .account-art{ background:linear-gradient(165deg, var(--lacquer), var(--gold)); position:relative; min-height:100%; }
+  .account-art .swatch-wall{ opacity:.35; }
+  .account-form-side{ background:var(--surface); padding:40px; }
+  .tab-row{ display:flex; gap:6px; margin-bottom:26px; background:var(--surface-sunk); padding:4px; border-radius:999px; }
+  .tab-btn{ flex:1; padding:10px; border:0; background:none; border-radius:999px; font-weight:600; cursor:pointer; color:var(--ink-muted); }
+  .tab-btn[aria-selected="true"]{ background:var(--surface); color:var(--ink); box-shadow:var(--shadow); }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+  .field label{ font-size:.82rem; font-weight:600; color:var(--ink-muted); }
+  .field input, .field textarea, .field select{
+    padding:12px 14px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--bg); color:var(--ink); font-family:inherit; font-size:.96rem;
+  }
+  .field input:focus, .field textarea:focus{ border-color:var(--lacquer); }
+  .form-foot{ margin-top:6px; font-size:.85rem; color:var(--ink-muted); text-align:center; }
+  .form-foot button{ background:none; border:0; color:var(--lacquer); font-weight:600; cursor:pointer; padding:0; }
+
+  /* ---------- basket ---------- */
+  .basket-layout{ display:grid; grid-template-columns:1.7fr 1fr; gap:28px; align-items:start; }
+  .basket-item{ display:flex; gap:16px; align-items:center; padding:16px 0; border-bottom:1px solid var(--border); }
+  .basket-item:last-child{ border-bottom:0; }
+  .item-swatch{ width:52px; height:70px; flex-shrink:0; }
+  .item-info{ flex:1; min-width:0; }
+  .item-info .name{ font-weight:600; }
+  .item-info .meta{ font-size:.8rem; color:var(--ink-muted); margin-top:2px; }
+  .qty-stepper{ display:flex; align-items:center; gap:10px; border:1px solid var(--border); border-radius:999px; padding:4px 10px; }
+  .qty-stepper button{ width:22px; height:22px; border-radius:50%; border:0; background:var(--surface-sunk); cursor:pointer; display:grid; place-items:center; }
+  .qty-stepper span{ min-width:1.2ch; text-align:center; font-variant-numeric:tabular-nums; }
+  .remove-btn{ background:none; border:0; color:var(--ink-muted); cursor:pointer; font-size:.8rem; text-decoration:underline; }
+  .summary-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:24px; box-shadow:var(--shadow); position:sticky; top:90px; }
+  .summary-row{ display:flex; justify-content:space-between; font-size:.92rem; margin-bottom:10px; color:var(--ink-muted); }
+  .summary-row.total{ color:var(--ink); font-weight:700; font-size:1.1rem; border-top:1px solid var(--border); padding-top:14px; margin-top:14px; }
+  .promo-row{ display:flex; gap:8px; margin:16px 0; }
+  .promo-row input{ flex:1; padding:10px 12px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--bg); color:var(--ink); }
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-muted); }
+  .empty-state h3{ color:var(--ink); margin-bottom:8px; }
+
+  /* ---------- checkout ---------- */
+  .steps{ display:flex; gap:0; margin-bottom:36px; max-width:520px; }
+  .step{ flex:1; text-align:center; position:relative; }
+  .step::before{ content:""; position:absolute; top:15px; left:-50%; width:100%; height:2px; background:var(--border); z-index:0; }
+  .step:first-child::before{ display:none; }
+  .step.done::before{ background:var(--lacquer); }
+  .step .dot{ width:32px; height:32px; border-radius:50%; background:var(--surface-sunk); border:2px solid var(--border); display:grid; place-items:center; margin-inline:auto; font-weight:700; font-size:.85rem; position:relative; z-index:1; }
+  .step.done .dot, .step.current .dot{ background:var(--lacquer); border-color:var(--lacquer); color:#fff8f6; }
+  .step .label{ font-size:.78rem; margin-top:8px; color:var(--ink-muted); }
+  .step.current .label{ color:var(--ink); font-weight:600; }
+  .checkout-layout{ display:grid; grid-template-columns:1.6fr 1fr; gap:28px; align-items:start; }
+  .checkout-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:28px; box-shadow:var(--shadow); }
+  .co-step{ display:none; }
+  .co-step.active{ display:block; }
+  .field-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .pay-options{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:6px; }
+  .pay-card{ border:1px solid var(--border); border-radius:var(--radius-s); padding:14px; cursor:pointer; display:flex; align-items:center; gap:10px; font-weight:600; }
+  .pay-card[aria-pressed="true"]{ border-color:var(--lacquer); box-shadow:0 0 0 1px var(--lacquer); }
+  .pay-mark{ width:30px; height:20px; border-radius:4px; background:var(--surface-sunk); display:grid; place-items:center; font-size:.6rem; letter-spacing:.03em; color:var(--ink-muted); }
+  .co-actions{ display:flex; justify-content:space-between; margin-top:26px; }
+  .confirm-box{ text-align:center; padding:20px 0; }
+  .confirm-box .nail-chip{ width:56px; height:76px; margin-inline:auto 0; }
+  .order-no{ font-family:var(--font-display); font-size:1.4rem; color:var(--lacquer); margin-top:8px; }
+
+  /* ---------- builder ---------- */
+  .builder-layout{ display:grid; grid-template-columns:1fr 1.1fr; gap:36px; align-items:start; }
+  .preview-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:30px; box-shadow:var(--shadow); position:sticky; top:90px; }
+  .hero-nail-stage{ display:grid; place-items:center; padding:20px 0 30px; }
+  .hero-nail{ width:130px; transition:height .3s ease; }
+  .hand-row{ display:flex; gap:10px; justify-content:center; }
+  .hand-row .nail-chip{ width:30px; }
+  .builder-price{ text-align:center; margin-top:22px; }
+  .builder-price .amount{ font-family:var(--font-display); font-size:2rem; font-weight:600; }
+  .breakdown{ margin-top:14px; font-size:.82rem; color:var(--ink-muted); display:flex; flex-direction:column; gap:4px; }
+  .breakdown div{ display:flex; justify-content:space-between; }
+
+  .option-group{ margin-bottom:28px; }
+  .option-group h3{ font-size:.98rem; font-weight:600; margin-bottom:12px; }
+  .shape-row, .length-row, .finish-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .opt-btn{ border:1px solid var(--border); background:var(--surface); border-radius:var(--radius-s); padding:10px 14px; cursor:pointer; font-size:.85rem; font-weight:500; display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .opt-btn[aria-pressed="true"]{ border-color:var(--lacquer); box-shadow:0 0 0 1px var(--lacquer); background:var(--surface-sunk); }
+  .opt-btn .nail-chip{ width:20px; height:26px; }
+  .color-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .color-swatch{ width:38px; height:38px; border-radius:50%; border:2px solid transparent; cursor:pointer; box-shadow:inset 0 -4px 8px rgba(0,0,0,.2), inset 0 3px 4px rgba(255,255,255,.3); }
+  .color-swatch[aria-pressed="true"]{ border-color:var(--ink); outline:2px solid var(--gold); outline-offset:2px; }
+  .addon-row{ display:flex; flex-direction:column; gap:10px; }
+  .addon-check{ display:flex; align-items:center; justify-content:space-between; border:1px solid var(--border); border-radius:var(--radius-s); padding:12px 14px; cursor:pointer; }
+  .addon-check span.p{ color:var(--ink-muted); font-size:.85rem; }
+  .addon-check input{ width:18px; height:18px; accent-color:var(--lacquer); }
+
+  /* ---------- contact ---------- */
+  .contact-layout{ display:grid; grid-template-columns:1.2fr 1fr; gap:32px; }
+  .info-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:26px; box-shadow:var(--shadow); }
+  .hours-table{ width:100%; border-collapse:collapse; margin-top:6px; font-size:.9rem; }
+  .hours-table td{ padding:7px 0; border-bottom:1px solid var(--border); }
+  .hours-table td:last-child{ text-align:right; font-variant-numeric:tabular-nums; color:var(--ink-muted); }
+  .map-block{ margin-top:20px; border-radius:var(--radius-s); height:150px; background:
+      repeating-linear-gradient(45deg, var(--surface-sunk), var(--surface-sunk) 10px, var(--bg) 10px, var(--bg) 20px);
+      display:grid; place-items:center; color:var(--ink-muted); font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; }
+  .social-row{ display:flex; gap:10px; margin-top:16px; }
+
+  /* ---------- footer ---------- */
+  .site-footer{ border-top:1px solid var(--border); padding-block:40px; margin-top:20px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:30px; }
+  .footer-grid h4{ font-size:.8rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-muted); margin-bottom:12px; }
+  .footer-grid ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; font-size:.9rem; }
+  .footer-bottom{ margin-top:34px; padding-top:20px; border-top:1px solid var(--border); font-size:.78rem; color:var(--ink-muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .main-nav{ display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; background:var(--bg); border-bottom:1px solid var(--border); padding:10px 20px 16px; gap:2px; }
+    .main-nav.open{ display:flex; }
+    .main-nav button{ text-align:left; border-radius:var(--radius-s); }
+    .menu-toggle{ display:grid; }
+    .feature-strip, .quote-row{ grid-template-columns:repeat(2,1fr); }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+    .bio-row, .account-shell, .basket-layout, .checkout-layout, .builder-layout, .contact-layout{ grid-template-columns:1fr; }
+    .account-art{ min-height:140px; }
+    .summary-card, .preview-card{ position:static; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:560px){
+    .feature-strip, .quote-row, .gallery-grid{ grid-template-columns:1fr; }
+    .field-grid, .pay-options{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .header-row{ padding-block:10px; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="nail-square" clipPathUnits="objectBoundingBox">
+      <path d="M0.08,1 L0.08,0.2 Q0.08,0.05 0.24,0.03 L0.76,0.03 Q0.92,0.05 0.92,0.2 L0.92,1 Z"/>
+    </clipPath>
+    <clipPath id="nail-round" clipPathUnits="objectBoundingBox">
+      <path d="M0.1,1 L0.1,0.38 Q0.1,0.02 0.5,0.02 Q0.9,0.02 0.9,0.38 L0.9,1 Z"/>
+    </clipPath>
+    <clipPath id="nail-oval" clipPathUnits="objectBoundingBox">
+      <path d="M0.15,1 Q0.02,0.62 0.15,0.26 Q0.3,0.02 0.5,0.02 Q0.7,0.02 0.85,0.26 Q0.98,0.62 0.85,1 Z"/>
+    </clipPath>
+    <clipPath id="nail-almond" clipPathUnits="objectBoundingBox">
+      <path d="M0.18,1 Q0.04,0.56 0.2,0.3 Q0.35,0.03 0.5,0 Q0.65,0.03 0.8,0.3 Q0.96,0.56 0.82,1 Z"/>
+    </clipPath>
+    <clipPath id="nail-coffin" clipPathUnits="objectBoundingBox">
+      <path d="M0.14,1 Q0.09,0.6 0.27,0.26 L0.34,0.05 Q0.36,0.02 0.5,0.02 Q0.64,0.02 0.66,0.05 L0.73,0.26 Q0.91,0.6 0.86,1 Z"/>
+    </clipPath>
+    <clipPath id="nail-stiletto" clipPathUnits="objectBoundingBox">
+      <path d="M0.2,1 Q0.06,0.54 0.22,0.28 L0.5,0 L0.78,0.28 Q0.94,0.54 0.8,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <button class="brand" data-nav="home" aria-label="Rebecca Nail Studio, go to home">
+      <span class="brand-word">Rebecca</span>
+      <span class="brand-sub">NAIL&nbsp;STUDIO</span>
+    </button>
+    <nav class="main-nav" id="mainNav">
+      <button data-nav="home">Home</button>
+      <button data-nav="gallery">Gallery</button>
+      <button data-nav="builder">Nail Builder</button>
+      <button data-nav="account">Account</button>
+      <button data-nav="contact">Contact</button>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <button class="icon-btn" data-nav="basket" aria-label="Basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="basket-count" id="basketCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="stage" class="wrap">
+
+  <!-- HOME -->
+  <section class="screen active" data-screen="home">
+    <div class="hero">
+      <div class="swatch-wall" id="swatchWall" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Bespoke manicures &amp; nail art</p>
+        <h1>Lacquer,<br><em>designed</em> around you.</h1>
+        <p>Rebecca hand-finishes every set in-studio &mdash; from a classic glossy gel to a fully custom design built shape-by-shape, colour-by-colour in the builder.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-tip" data-nav="builder">Design your set</button>
+          <button class="btn btn-ghost" data-nav="gallery">View the menu</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="pane">
+      <div class="pane-head">
+        <p class="eyebrow">Techniques</p>
+        <h2>Every finish, done properly</h2>
+      </div>
+      <div class="feature-strip">
+        <div class="feature-card">
+          <div class="nail-chip shape-oval"><div class="base finish-glossy" style="background:#8e1f3b"><div class="shine"></div></div></div>
+          <h3>Gel Manicure</h3>
+          <p>A high-shine, chip-resistant finish that lasts up to three weeks.</p>
+        </div>
+        <div class="feature-card">
+          <div class="nail-chip shape-coffin"><div class="base finish-chrome" style="background:#b8925a"><div class="shine"></div></div></div>
+          <h3>Acrylic Extensions</h3>
+          <p>Full sets sculpted to your ideal shape and length, from square to stiletto.</p>
+        </div>
+        <div class="feature-card">
+          <div class="nail-chip shape-almond"><div class="base finish-cateye" style="background:#4a2537"><div class="shine"></div></div></div>
+          <h3>Dip Powder</h3>
+          <p>Lightweight, durable colour with zero UV curing required.</p>
+        </div>
+        <div class="feature-card">
+          <div class="nail-chip shape-round"><div class="base finish-glitter" style="background:#c23a56"><div class="shine"></div></div></div>
+          <h3>Hand-Painted Art</h3>
+          <p>Freehand line work, foils and gems &mdash; as detailed as you like.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pane">
+      <div class="pane-head">
+        <p class="eyebrow">Regulars say</p>
+        <h2>Booked out for a reason</h2>
+      </div>
+      <div class="quote-row">
+        <div class="quote-card"><p class="quote">"I used the builder to plan my wedding set before I even booked &mdash; Rebecca matched it stitch for stitch."</p><p class="who">Niamh, bridal client</p></div>
+        <div class="quote-card"><p class="quote">"First chrome set that's actually lasted three weeks without lifting. Worth every penny."</p><p class="who">Aoife, regular since 2024</p></div>
+        <div class="quote-card"><p class="quote">"The only nail bar I've been to where the shape is exactly what I asked for, every time."</p><p class="who">Sarah, monthly regular</p></div>
+      </div>
+    </section>
+
+    <section class="pane">
+      <div class="bio-row">
+        <div class="bio-frame"></div>
+        <div>
+          <p class="eyebrow">Meet Rebecca</p>
+          <h2 style="margin-top:8px;">Ten years, one chair, no compromises</h2>
+          <p style="margin-top:14px;color:var(--ink-muted);max-width:52ch;">Rebecca trained in Belfast and London before opening her own studio in 2021. Every appointment is one-on-one &mdash; no double-booking, no rushed tip-fills, just proper time spent getting the shape and finish right.</p>
+          <div style="margin-top:24px;"><button class="btn btn-ghost" data-nav="contact">Book a consultation</button></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="screen" data-screen="gallery">
+    <section class="pane" style="border-bottom:0;">
+      <div class="pane-head">
+        <p class="eyebrow">The menu</p>
+        <h2>Product &amp; design gallery</h2>
+        <p>Every set is available as shown, or as a starting point in the Nail Builder.</p>
+      </div>
+      <div class="chip-row" id="chipRow">
+        <button class="chip" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" aria-pressed="false" data-filter="Gel">Gel</button>
+        <button class="chip" aria-pressed="false" data-filter="Acrylic">Acrylic</button>
+        <button class="chip" aria-pressed="false" data-filter="Dip Powder">Dip Powder</button>
+        <button class="chip" aria-pressed="false" data-filter="Nail Art">Nail Art</button>
+        <button class="chip" aria-pressed="false" data-filter="Bridal">Bridal</button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+  </section>
+
+  <!-- ACCOUNT -->
+  <section class="screen" data-screen="account">
+    <section class="pane" style="border-bottom:0;">
+      <div class="account-shell">
+        <div class="account-art"><div class="swatch-wall" id="swatchWallAccount" aria-hidden="true"></div></div>
+        <div class="account-form-side">
+          <div class="tab-row">
+            <button class="tab-btn" aria-selected="true" data-tab="login">Log in</button>
+            <button class="tab-btn" aria-selected="false" data-tab="signup">Create account</button>
+          </div>
+          <form id="loginForm">
+            <div class="field"><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="you@example.com"></div>
+            <div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"></div>
+            <button class="btn btn-primary btn-block" type="submit">Log in</button>
+            <p class="form-foot">New here? <button type="button" data-tab="signup">Create an account</button></p>
+          </form>
+          <form id="signupForm" style="display:none;">
+            <div class="field"><label for="signupName">Full name</label><input id="signupName" type="text" placeholder="Jane Doe"></div>
+            <div class="field"><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="you@example.com"></div>
+            <div class="field"><label for="signupPassword">Password</label><input id="signupPassword" type="password" placeholder="At least 8 characters"></div>
+            <button class="btn btn-primary btn-block" type="submit">Create account</button>
+            <p class="form-foot">Already have an account? <button type="button" data-tab="login">Log in</button></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- BASKET -->
+  <section class="screen" data-screen="basket">
+    <section class="pane" style="border-bottom:0;">
+      <div class="pane-head"><p class="eyebrow">Your basket</p><h2>Ready when you are</h2></div>
+      <div id="basketBody"></div>
+    </section>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section class="screen" data-screen="checkout">
+    <section class="pane" style="border-bottom:0;">
+      <div class="steps" id="checkoutSteps">
+        <div class="step current" data-step="1"><div class="dot">1</div><div class="label">Details</div></div>
+        <div class="step" data-step="2"><div class="dot">2</div><div class="label">Payment</div></div>
+        <div class="step" data-step="3"><div class="dot">3</div><div class="label">Confirm</div></div>
+      </div>
+      <div class="checkout-layout">
+        <div class="checkout-card">
+          <div class="co-step active" data-co-step="1">
+            <h3 style="font-size:1.1rem;margin-bottom:16px;">Contact &amp; delivery</h3>
+            <div class="field-grid">
+              <div class="field"><label for="coFirst">First name</label><input id="coFirst" type="text"></div>
+              <div class="field"><label for="coLast">Last name</label><input id="coLast" type="text"></div>
+            </div>
+            <div class="field"><label for="coEmail">Email</label><input id="coEmail" type="email"></div>
+            <div class="field"><label for="coAddress">Studio visit date</label><input id="coAddress" type="date"></div>
+            <div class="co-actions"><span></span><button class="btn btn-primary" data-co-next="2">Continue to payment</button></div>
+          </div>
+          <div class="co-step" data-co-step="2">
+            <h3 style="font-size:1.1rem;margin-bottom:16px;">Payment method</h3>
+            <div class="pay-options" id="payOptions">
+              <button class="pay-card" aria-pressed="true" data-pay="Card"><span class="pay-mark">CARD</span>Credit / debit card</button>
+              <button class="pay-card" aria-pressed="false" data-pay="Apple Pay"><span class="pay-mark">PAY</span>Apple Pay</button>
+              <button class="pay-card" aria-pressed="false" data-pay="PayPal"><span class="pay-mark">PP</span>PayPal</button>
+              <button class="pay-card" aria-pressed="false" data-pay="Klarna"><span class="pay-mark">K.</span>Klarna, pay later</button>
+            </div>
+            <div class="field" style="margin-top:18px;"><label for="coCard">Card number</label><input id="coCard" type="text" placeholder="4242 4242 4242 4242"></div>
+            <div class="field-grid">
+              <div class="field"><label for="coExpiry">Expiry</label><input id="coExpiry" type="text" placeholder="MM / YY"></div>
+              <div class="field"><label for="coCvc">CVC</label><input id="coCvc" type="text" placeholder="123"></div>
+            </div>
+            <div class="co-actions"><button class="btn btn-ghost" data-co-back="1">Back</button><button class="btn btn-primary" data-co-next="3">Review order</button></div>
+          </div>
+          <div class="co-step" data-co-step="3">
+            <div class="confirm-box">
+              <div class="nail-chip shape-almond"><div class="base finish-glossy" style="background:#8e1f3b"><div class="shine"></div></div></div>
+              <h3 style="margin-top:16px;">Booking confirmed</h3>
+              <p style="color:var(--ink-muted);margin-top:6px;">A confirmation email is on its way.</p>
+              <p class="order-no" id="orderNo">#RB-40218</p>
+              <button class="btn btn-primary" data-nav="home" style="margin-top:20px;">Back to home</button>
+            </div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <h3 style="font-size:1rem;margin-bottom:14px;">Order summary</h3>
+          <div id="checkoutSummaryLines"></div>
+          <div class="summary-row total"><span>Total</span><span id="checkoutTotal">&pound;0.00</span></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- BUILDER -->
+  <section class="screen" data-screen="builder">
+    <section class="pane" style="border-bottom:0;">
+      <div class="pane-head">
+        <p class="eyebrow">Custom nail builder</p>
+        <h2>Design your set</h2>
+        <p>Pick a shape, length and finish, then layer on the details &mdash; the preview and price update as you go.</p>
+      </div>
+      <div class="builder-layout">
+        <div class="preview-card">
+          <div class="hero-nail-stage">
+            <div class="nail-chip hero-nail shape-almond" id="heroNail" style="height:190px;">
+              <div class="base finish-glossy" id="heroNailBase" style="background:#8e1f3b;">
+                <div class="shine"></div>
+                <div id="heroAddonLayer"></div>
+              </div>
+            </div>
+          </div>
+          <div class="hand-row" id="handRow"></div>
+          <div class="builder-price">
+            <div class="amount" id="builderTotal">&pound;42.00</div>
+            <div class="breakdown" id="builderBreakdown"></div>
+          </div>
+          <button class="btn btn-primary btn-block" style="margin-top:20px;" id="addBuilderToBasket">Add to basket</button>
+        </div>
+
+        <div>
+          <div class="option-group">
+            <h3>Shape</h3>
+            <div class="shape-row" id="shapeRow"></div>
+          </div>
+          <div class="option-group">
+            <h3>Length</h3>
+            <div class="length-row" id="lengthRow"></div>
+          </div>
+          <div class="option-group">
+            <h3>Finish</h3>
+            <div class="finish-row" id="finishRow"></div>
+          </div>
+          <div class="option-group">
+            <h3>Colour</h3>
+            <div class="color-row" id="colorRow"></div>
+          </div>
+          <div class="option-group">
+            <h3>Add-ons</h3>
+            <div class="addon-row" id="addonRow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="screen" data-screen="contact">
+    <section class="pane" style="border-bottom:0;">
+      <div class="pane-head"><p class="eyebrow">Get in touch</p><h2>Contact us</h2></div>
+      <div class="contact-layout">
+        <form class="info-card">
+          <div class="field"><label for="ctName">Name</label><input id="ctName" type="text"></div>
+          <div class="field"><label for="ctEmail">Email</label><input id="ctEmail" type="email"></div>
+          <div class="field"><label for="ctMessage">Message</label><textarea id="ctMessage" rows="5" placeholder="Tell us what you're after&hellip;"></textarea></div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+        </form>
+        <div>
+          <div class="info-card">
+            <h3 style="font-size:1rem;">Studio</h3>
+            <p style="color:var(--ink-muted);margin-top:8px;font-size:.92rem;">14 Lacquer Lane, Belfast, BT1 2AB</p>
+            <p style="color:var(--ink-muted);font-size:.92rem;">+44 28 9000 1122 &middot; hello@rebeccanailstudio.com</p>
+            <table class="hours-table">
+              <tr><td>Tue &ndash; Fri</td><td>9:30 &ndash; 17:30</td></tr>
+              <tr><td>Saturday</td><td>9:00 &ndash; 16:00</td></tr>
+              <tr><td>Sun &ndash; Mon</td><td>Closed</td></tr>
+            </table>
+            <div class="social-row">
+              <span class="chip">Instagram &middot; @rebeccanailstudio</span>
+            </div>
+            <div class="map-block">Studio map</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="brand-word" style="font-size:1.2rem;">Rebecca</span>
+        <p style="margin-top:10px;color:var(--ink-muted);font-size:.9rem;max-width:32ch;">Bespoke nail studio in Belfast. Book in-studio or design your set online first.</p>
+      </div>
+      <div><h4>Shop</h4><ul><li><button data-nav="gallery" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Gallery</button></li><li><button data-nav="builder" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Nail Builder</button></li><li><button data-nav="basket" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Basket</button></li></ul></div>
+      <div><h4>Studio</h4><ul><li><button data-nav="contact" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Contact</button></li><li><button data-nav="account" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Account</button></li></ul></div>
+      <div><h4>Follow</h4><ul><li>Instagram</li><li>TikTok</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Rebecca Nail Studio</span>
+      <span>Belfast, Northern Ireland</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var SHAPES = ["square","round","oval","almond","coffin","stiletto"];
+  var LENGTHS = [
+    {key:"short", label:"Short", height:120, price:0},
+    {key:"medium", label:"Medium", height:150, price:3},
+    {key:"long", label:"Long", height:180, price:6},
+    {key:"xl", label:"Editorial", height:215, price:9}
+  ];
+  var FINISHES = [
+    {key:"glossy", label:"Glossy Gel", price:0},
+    {key:"matte", label:"Matte", price:2},
+    {key:"chrome", label:"Chrome", price:8},
+    {key:"cateye", label:"Cat-Eye", price:6},
+    {key:"glitter", label:"Glitter Fade", price:5},
+    {key:"frenchtip", label:"French Tip", price:4}
+  ];
+  var COLORS = [
+    {key:"rebecca-red", label:"Rebecca Red", hex:"#8e1f3b"},
+    {key:"wine", label:"Wine O'Clock", hex:"#4a1626"},
+    {key:"rose-quartz", label:"Rose Quartz", hex:"#d99aa4"},
+    {key:"bare", label:"Bare Necessity", hex:"#e7c6b8"},
+    {key:"porcelain", label:"Porcelain", hex:"#f3e9e2"},
+    {key:"midnight", label:"Midnight Velvet", hex:"#241322"},
+    {key:"gilded", label:"Gilded", hex:"#b8925a"},
+    {key:"sage", label:"Sage Whisper", hex:"#8a9a7e"}
+  ];
+  var ADDONS = [
+    {key:"gems", label:"Hand-placed gems", price:6},
+    {key:"foil", label:"24k gold foil", price:5},
+    {key:"charm", label:"3D charm", price:4},
+    {key:"lineart", label:"Hand-painted line art", price:7}
+  ];
+  var BASE_PRICE = 42;
+
+  var GALLERY_ITEMS = [
+    {id:"g1", name:"Classic French", cat:"Gel", price:32, shape:"oval", finish:"frenchtip", color:"#f3e9e2"},
+    {id:"g2", name:"Rebecca Red Gel", cat:"Gel", price:34, shape:"round", finish:"glossy", color:"#8e1f3b"},
+    {id:"g3", name:"Mirror Chrome", cat:"Acrylic", price:48, shape:"coffin", finish:"chrome", color:"#b8925a"},
+    {id:"g4", name:"Almond Stiletto Set", cat:"Acrylic", price:52, shape:"stiletto", finish:"glossy", color:"#241322"},
+    {id:"g5", name:"Cat-Eye Velvet", cat:"Dip Powder", price:38, shape:"almond", finish:"cateye", color:"#4a1626"},
+    {id:"g6", name:"Sage Whisper Dip", cat:"Dip Powder", price:36, shape:"square", finish:"matte", color:"#8a9a7e"},
+    {id:"g7", name:"Glitter Fade Tips", cat:"Nail Art", price:40, shape:"round", finish:"glitter", color:"#d99aa4"},
+    {id:"g8", name:"Gilded Line Art", cat:"Nail Art", price:44, shape:"almond", finish:"glossy", color:"#b8925a"},
+    {id:"g9", name:"Bridal Porcelain", cat:"Bridal", price:56, shape:"oval", finish:"frenchtip", color:"#f3e9e2"}
+  ];
+
+  var state = {
+    screen: "home",
+    basket: [],
+    orderCounter: 40218,
+    checkoutStep: 1,
+    payment: "Card",
+    builder: { shape:"almond", length:"medium", finish:"glossy", color:COLORS[0], addons:[] }
+  };
+
+  function money(n){ return "£" + n.toFixed(2); }
+  function el(html){ var t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstChild; }
+
+  function nailChipHTML(shape, finish, hex, addons){
+    addons = addons || [];
+    var addonHTML = "";
+    if(addons.indexOf("gems")>-1){ addonHTML += '<span class="addon-gem" style="width:14%;height:8%;left:20%;bottom:8%;"></span><span class="addon-gem" style="width:12%;height:7%;left:60%;bottom:6%;"></span>'; }
+    if(addons.indexOf("foil")>-1){ addonHTML += '<span class="addon-foil"></span>'; }
+    if(addons.indexOf("charm")>-1){ addonHTML += '<span class="addon-gem" style="width:16%;height:9%;left:42%;bottom:4%;background:radial-gradient(circle at 35% 30%,#fff,#8e1f3b 70%);"></span>'; }
+    return '<div class="base finish-'+finish+'" style="background:'+hex+';"><div class="shine"></div>'+addonHTML+'</div>';
+  }
+
+  // nav
+  function goTo(name){
+    state.screen = name;
+    document.querySelectorAll(".screen").forEach(function(s){
+      var active = s.dataset.screen === name;
+      s.classList.toggle("active", active);
+    });
+    document.querySelectorAll("[data-nav]").forEach(function(b){
+      if(b.closest(".main-nav")) b.toggleAttribute && b.setAttribute("aria-current", b.dataset.nav===name ? "page" : "false");
+    });
+    document.getElementById("mainNav").classList.remove("open");
+    document.getElementById("menuToggle").setAttribute("aria-expanded","false");
+    window.scrollTo({top:0, behavior:"instant"});
+    if(name==="basket") renderBasket();
+    if(name==="checkout") renderCheckoutSummary();
+  }
+  document.addEventListener("click", function(e){
+    var t = e.target.closest("[data-nav]");
+    if(t){ goTo(t.dataset.nav); }
+  });
+  document.getElementById("menuToggle").addEventListener("click", function(){
+    var nav = document.getElementById("mainNav");
+    var open = nav.classList.toggle("open");
+    this.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  // decorative swatch walls
+  var wallColors = COLORS.map(function(c){return c.hex;});
+  function paintWall(id){
+    var wall = document.getElementById(id);
+    if(!wall) return;
+    var html = "";
+    for(var i=0;i<32;i++){ html += '<span style="background:'+wallColors[i % wallColors.length]+';"></span>'; }
+    wall.innerHTML = html;
+  }
+  paintWall("swatchWall");
+  paintWall("swatchWallAccount");
+
+  // basket
+  function addToBasket(item){
+    var existing = state.basket.find(function(b){ return b.key===item.key; });
+    if(existing){ existing.qty += 1; } else { item.qty = 1; state.basket.push(item); }
+    updateBasketCount();
+    if(state.screen==="basket") renderBasket();
+  }
+  function updateBasketCount(){
+    var count = state.basket.reduce(function(n,b){ return n+b.qty; }, 0);
+    document.getElementById("basketCount").textContent = count;
+  }
+  function basketSubtotal(){ return state.basket.reduce(function(n,b){ return n + b.price*b.qty; }, 0); }
+
+  function renderBasket(){
+    var body = document.getElementById("basketBody");
+    if(state.basket.length===0){
+      body.innerHTML = '<div class="empty-state"><h3>Your basket is empty</h3><p>Head to the gallery or design a custom set to get started.</p>' +
+        '<div style="margin-top:18px;display:flex;gap:10px;justify-content:center;"><button class="btn btn-primary btn-tip" data-nav="builder">Design a set</button><button class="btn btn-ghost" data-nav="gallery">Browse gallery</button></div></div>';
+      return;
+    }
+    var itemsHTML = state.basket.map(function(b){
+      return '<div class="basket-item">' +
+        '<div class="nail-chip item-swatch shape-'+b.shape+'">'+ nailChipHTML(b.shape, b.finish, b.hex, b.addons) +'</div>' +
+        '<div class="item-info"><div class="name">'+b.name+'</div><div class="meta">'+b.meta+'</div></div>' +
+        '<div class="qty-stepper"><button data-qty="-1" data-key="'+b.key+'">&minus;</button><span>'+b.qty+'</span><button data-qty="1" data-key="'+b.key+'">+</button></div>' +
+        '<div class="price">'+money(b.price*b.qty)+'</div>' +
+        '<button class="remove-btn" data-remove="'+b.key+'">Remove</button>' +
+      '</div>';
+    }).join("");
+    var subtotal = basketSubtotal();
+    body.innerHTML = '<div class="basket-layout">' +
+      '<div>'+itemsHTML+'</div>' +
+      '<div class="summary-card">' +
+        '<div class="summary-row"><span>Subtotal</span><span>'+money(subtotal)+'</span></div>' +
+        '<div class="summary-row"><span>Studio fee</span><span>'+money(0)+'</span></div>' +
+        '<div class="promo-row"><input type="text" id="promoInput" placeholder="Promo code"><button class="btn btn-ghost btn-sm" id="promoBtn">Apply</button></div>' +
+        '<div class="summary-row total"><span>Total</span><span>'+money(subtotal)+'</span></div>' +
+        '<button class="btn btn-primary btn-block" data-nav="checkout" style="margin-top:6px;">Checkout</button>' +
+      '</div>' +
+    '</div>';
+    document.getElementById("promoBtn").addEventListener("click", function(){
+      var input = document.getElementById("promoInput");
+      input.placeholder = "Code not recognised";
+      input.value = "";
+    });
+  }
+
+  document.addEventListener("click", function(e){
+    var qtyBtn = e.target.closest("[data-qty]");
+    if(qtyBtn){
+      var item = state.basket.find(function(b){ return b.key===qtyBtn.dataset.key; });
+      if(item){
+        item.qty += parseInt(qtyBtn.dataset.qty,10);
+        if(item.qty<=0){ state.basket = state.basket.filter(function(b){ return b.key!==item.key; }); }
+        updateBasketCount(); renderBasket();
+      }
+    }
+    var rm = e.target.closest("[data-remove]");
+    if(rm){ state.basket = state.basket.filter(function(b){ return b.key!==rm.dataset.remove; }); updateBasketCount(); renderBasket(); }
+  });
+
+  // gallery
+  function renderGallery(filter){
+    var grid = document.getElementById("galleryGrid");
+    var items = GALLERY_ITEMS.filter(function(g){ return filter==="all" || g.cat===filter; });
+    grid.innerHTML = items.map(function(g){
+      return '<div class="design-card">' +
+        '<div class="swatch-stage"><div class="nail-chip shape-'+g.shape+'">'+nailChipHTML(g.shape,g.finish,g.color,[])+'</div></div>' +
+        '<div class="info"><div class="name">'+g.name+'</div><div class="meta">'+g.cat+'</div>' +
+        '<div class="row"><span class="price">'+money(g.price)+'</span><button class="btn btn-primary btn-sm" data-add-gallery="'+g.id+'">Add</button></div></div>' +
+      '</div>';
+    }).join("");
+  }
+  document.getElementById("chipRow").addEventListener("click", function(e){
+    var chip = e.target.closest(".chip");
+    if(!chip) return;
+    document.querySelectorAll("#chipRow .chip").forEach(function(c){ c.setAttribute("aria-pressed","false"); });
+    chip.setAttribute("aria-pressed","true");
+    renderGallery(chip.dataset.filter);
+  });
+  document.getElementById("galleryGrid").addEventListener("click", function(e){
+    var btn = e.target.closest("[data-add-gallery]");
+    if(!btn) return;
+    var g = GALLERY_ITEMS.find(function(x){ return x.id===btn.dataset.addGallery; });
+    addToBasket({ key:"gallery-"+g.id, name:g.name, meta:g.cat+" · ready design", price:g.price, shape:g.shape, finish:g.finish, hex:g.color, addons:[] });
+  });
+  renderGallery("all");
+
+  // account tabs
+  function setTab(tab){
+    document.querySelectorAll(".tab-btn").forEach(function(b){ b.setAttribute("aria-selected", b.dataset.tab===tab ? "true":"false"); });
+    document.getElementById("loginForm").style.display = tab==="login" ? "block":"none";
+    document.getElementById("signupForm").style.display = tab==="signup" ? "block":"none";
+  }
+  document.querySelectorAll("[data-tab]").forEach(function(b){ b.addEventListener("click", function(){ setTab(b.dataset.tab); }); });
+  ["loginForm","signupForm"].forEach(function(id){
+    document.getElementById(id).addEventListener("submit", function(e){ e.preventDefault(); goTo("home"); });
+  });
+
+  // checkout
+  function setCheckoutStep(n){
+    state.checkoutStep = n;
+    document.querySelectorAll(".co-step").forEach(function(s){ s.classList.toggle("active", parseInt(s.dataset.coStep,10)===n); });
+    document.querySelectorAll("#checkoutSteps .step").forEach(function(s){
+      var num = parseInt(s.dataset.step,10);
+      s.classList.toggle("done", num<n);
+      s.classList.toggle("current", num===n);
+    });
+    if(n===3){
+      state.orderCounter += 1;
+      document.getElementById("orderNo").textContent = "#RB-"+state.orderCounter;
+    }
+  }
+  document.addEventListener("click", function(e){
+    var next = e.target.closest("[data-co-next]");
+    if(next) setCheckoutStep(parseInt(next.dataset.coNext,10));
+    var back = e.target.closest("[data-co-back]");
+    if(back) setCheckoutStep(parseInt(back.dataset.coBack,10));
+    var pay = e.target.closest("[data-pay]");
+    if(pay){
+      document.querySelectorAll("#payOptions .pay-card").forEach(function(p){ p.setAttribute("aria-pressed","false"); });
+      pay.setAttribute("aria-pressed","true");
+      state.payment = pay.dataset.pay;
+    }
+  });
+  function renderCheckoutSummary(){
+    setCheckoutStep(1);
+    var lines = document.getElementById("checkoutSummaryLines");
+    var subtotal = basketSubtotal();
+    lines.innerHTML = state.basket.map(function(b){
+      return '<div class="summary-row"><span>'+b.name+' &times; '+b.qty+'</span><span>'+money(b.price*b.qty)+'</span></div>';
+    }).join("") || '<div class="summary-row"><span>No items yet</span><span>'+money(0)+'</span></div>';
+    document.getElementById("checkoutTotal").textContent = money(subtotal);
+  }
+
+  // builder
+  var shapeLabels = {square:"Square", round:"Round", oval:"Oval", almond:"Almond", coffin:"Coffin", stiletto:"Stiletto"};
+  function renderBuilderControls(){
+    document.getElementById("shapeRow").innerHTML = SHAPES.map(function(s){
+      return '<button class="opt-btn" data-shape="'+s+'" aria-pressed="'+(state.builder.shape===s)+'"><div class="nail-chip shape-'+s+'"><div class="base finish-glossy" style="background:var(--ink-muted)"></div></div>'+shapeLabels[s]+'</button>';
+    }).join("");
+    document.getElementById("lengthRow").innerHTML = LENGTHS.map(function(l){
+      return '<button class="opt-btn" data-length="'+l.key+'" aria-pressed="'+(state.builder.length===l.key)+'">'+l.label+(l.price?' <span style="color:var(--ink-muted);font-weight:400;">+'+money(l.price)+'</span>':'')+'</button>';
+    }).join("");
+    document.getElementById("finishRow").innerHTML = FINISHES.map(function(f){
+      return '<button class="opt-btn" data-finish="'+f.key+'" aria-pressed="'+(state.builder.finish===f.key)+'">'+f.label+(f.price?' <span style="color:var(--ink-muted);font-weight:400;">+'+money(f.price)+'</span>':'')+'</button>';
+    }).join("");
+    document.getElementById("colorRow").innerHTML = COLORS.map(function(c){
+      return '<button class="color-swatch" data-color="'+c.key+'" aria-pressed="'+(state.builder.color.key===c.key)+'" style="background:'+c.hex+';" title="'+c.label+'" aria-label="'+c.label+'"></button>';
+    }).join("");
+    document.getElementById("addonRow").innerHTML = ADDONS.map(function(a){
+      return '<label class="addon-check"><span>'+a.label+' <span class="p">+'+money(a.price)+'</span></span><input type="checkbox" id="addon-'+a.key+'" data-addon="'+a.key+'" '+(state.builder.addons.indexOf(a.key)>-1?"checked":"")+'></label>';
+    }).join("");
+  }
+
+  function renderBuilderPreview(){
+    var b = state.builder;
+    var hero = document.getElementById("heroNail");
+    hero.className = "nail-chip hero-nail shape-"+b.shape;
+    var lengthDef = LENGTHS.find(function(l){ return l.key===b.length; });
+    hero.style.height = lengthDef.height + "px";
+    var base = document.getElementById("heroNailBase");
+    base.className = "base finish-"+b.finish;
+    base.style.background = b.color.hex;
+    var addonLayer = document.getElementById("heroAddonLayer");
+    var addonHTML = "";
+    if(b.addons.indexOf("gems")>-1){ addonHTML += '<span class="addon-gem" style="width:12%;height:6%;left:22%;bottom:8%;"></span><span class="addon-gem" style="width:10%;height:5%;left:58%;bottom:5%;"></span>'; }
+    if(b.addons.indexOf("foil")>-1){ addonHTML += '<span class="addon-foil"></span>'; }
+    if(b.addons.indexOf("charm")>-1){ addonHTML += '<span class="addon-gem" style="width:13%;height:7%;left:42%;bottom:3%;background:radial-gradient(circle at 35% 30%,#fff,#8e1f3b 70%);"></span>'; }
+    addonLayer.innerHTML = addonHTML;
+
+    var hand = document.getElementById("handRow");
+    hand.innerHTML = "";
+    for(var i=0;i<5;i++){
+      var chip = document.createElement("div");
+      chip.className = "nail-chip shape-"+b.shape;
+      chip.style.height = "40px";
+      chip.innerHTML = nailChipHTML(b.shape, b.finish, b.color.hex, b.addons);
+      hand.appendChild(chip);
+    }
+
+    var addonTotal = b.addons.reduce(function(sum,key){ var a=ADDONS.find(function(x){return x.key===key;}); return sum + (a?a.price:0); }, 0);
+    var finishDef = FINISHES.find(function(f){ return f.key===b.finish; });
+    var total = BASE_PRICE + lengthDef.price + finishDef.price + addonTotal;
+    document.getElementById("builderTotal").textContent = money(total);
+    var lines = ['<div><span>Base custom set</span><span>'+money(BASE_PRICE)+'</span></div>'];
+    if(lengthDef.price) lines.push('<div><span>'+lengthDef.label+' length</span><span>+'+money(lengthDef.price)+'</span></div>');
+    if(finishDef.price) lines.push('<div><span>'+finishDef.label+'</span><span>+'+money(finishDef.price)+'</span></div>');
+    b.addons.forEach(function(key){ var a=ADDONS.find(function(x){return x.key===key;}); lines.push('<div><span>'+a.label+'</span><span>+'+money(a.price)+'</span></div>'); });
+    document.getElementById("builderBreakdown").innerHTML = lines.join("");
+    state.builder.total = total;
+  }
+
+  document.getElementById("shapeRow") && document.addEventListener("click", function(e){
+    var s = e.target.closest("[data-shape]"); if(s){ state.builder.shape=s.dataset.shape; renderBuilderControls(); renderBuilderPreview(); }
+    var l = e.target.closest("[data-length]"); if(l){ state.builder.length=l.dataset.length; renderBuilderControls(); renderBuilderPreview(); }
+    var f = e.target.closest("[data-finish]"); if(f){ state.builder.finish=f.dataset.finish; renderBuilderControls(); renderBuilderPreview(); }
+    var c = e.target.closest("[data-color]"); if(c){ state.builder.color = COLORS.find(function(x){return x.key===c.dataset.color;}); renderBuilderControls(); renderBuilderPreview(); }
+  });
+  document.getElementById("addonRow") && document.addEventListener("change", function(e){
+    var a = e.target.closest("[data-addon]");
+    if(a){
+      var key = a.dataset.addon;
+      var idx = state.builder.addons.indexOf(key);
+      if(a.checked && idx===-1) state.builder.addons.push(key);
+      if(!a.checked && idx>-1) state.builder.addons.splice(idx,1);
+      renderBuilderPreview();
+    }
+  });
+  document.getElementById("addBuilderToBasket").addEventListener("click", function(){
+    var b = state.builder;
+    var meta = shapeLabels[b.shape]+" · "+LENGTHS.find(function(l){return l.key===b.length;}).label+" · "+FINISHES.find(function(f){return f.key===b.finish;}).label;
+    addToBasket({
+      key: "custom-"+Date.now(),
+      name: "Custom "+shapeLabels[b.shape]+" Set",
+      meta: meta+" · "+b.color.label,
+      price: b.total,
+      shape: b.shape, finish: b.finish, hex: b.color.hex, addons: b.addons.slice()
+    });
+  });
+
+  renderBuilderControls();
+  renderBuilderPreview();
+  goTo("home");
+})();
+</script>
