@@ -343,6 +343,34 @@
       display:grid; place-items:center; color:var(--ink-muted); font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; }
   .social-row{ display:flex; gap:10px; margin-top:16px; }
 
+  /* ---------- sizing ---------- */
+  .size-howto{ display:flex; align-items:center; gap:24px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:24px; margin-bottom:32px; box-shadow:var(--shadow); }
+  .size-howto-visual{ flex-shrink:0; width:90px; text-align:center; }
+  .size-howto-visual .nail-chip{ width:70px; height:92px; margin-inline:auto; }
+  .size-howto-arrow{ width:70px; height:14px; margin-top:8px; stroke:var(--gold); stroke-width:2; fill:none; stroke-linecap:round; }
+  .size-howto-caption{ display:block; font-size:.7rem; color:var(--ink-muted); margin-top:4px; text-transform:uppercase; letter-spacing:.05em; }
+  .size-howto p{ color:var(--ink-muted); font-size:.95rem; }
+
+  .size-hands{ display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-bottom:32px; }
+  .size-hand h3{ font-size:1rem; font-weight:600; margin-bottom:8px; }
+  .finger-row{ display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .finger-row:last-child{ border-bottom:0; }
+  .finger-row .nail-chip{ height:44px; flex-shrink:0; transition:width .1s ease; }
+  .finger-info{ flex:1; min-width:0; }
+  .finger-label{ font-size:.85rem; font-weight:600; margin-bottom:6px; }
+  .finger-slider{ width:100%; accent-color:var(--lacquer); }
+  .finger-readout{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; min-width:70px; }
+  .mm-val{ font-size:.8rem; color:var(--ink-muted); font-variant-numeric:tabular-nums; }
+  .size-badge{ background:var(--surface-sunk); border:1px solid var(--border); border-radius:999px; padding:3px 10px; font-size:.78rem; font-weight:700; color:var(--ink); white-space:nowrap; }
+
+  .size-summary{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-m); padding:28px; box-shadow:var(--shadow); }
+  .size-summary h3{ font-size:1.05rem; font-weight:600; margin-bottom:16px; }
+  .size-summary-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+  .size-chip{ background:var(--surface-sunk); border-radius:var(--radius-s); padding:10px; text-align:center; display:flex; flex-direction:column; gap:4px; }
+  .size-chip span{ font-size:.7rem; color:var(--ink-muted); text-transform:uppercase; letter-spacing:.04em; }
+  .size-chip strong{ font-size:.95rem; font-variant-numeric:tabular-nums; }
+  .size-summary-actions{ display:flex; gap:12px; margin-top:22px; flex-wrap:wrap; }
+
   /* ---------- footer ---------- */
   .site-footer{ border-top:1px solid var(--border); padding-block:40px; margin-top:20px; }
   .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:30px; }
@@ -358,7 +386,8 @@
     .menu-toggle{ display:grid; }
     .feature-strip, .quote-row, .how-row{ grid-template-columns:repeat(2,1fr); }
     .gallery-grid{ grid-template-columns:repeat(2,1fr); }
-    .bio-row, .account-shell, .basket-layout, .checkout-layout, .builder-layout, .contact-layout, .hero-grid{ grid-template-columns:1fr; }
+    .bio-row, .account-shell, .basket-layout, .checkout-layout, .builder-layout, .contact-layout, .hero-grid, .size-hands{ grid-template-columns:1fr; }
+    .size-summary-grid{ grid-template-columns:repeat(5,1fr); }
     .account-art{ min-height:140px; }
     .summary-card, .preview-card{ position:static; }
     .footer-grid{ grid-template-columns:1fr 1fr; }
@@ -390,6 +419,10 @@
     .basket-item .item-info{ flex-basis:calc(100% - 68px); }
     .qty-stepper button{ width:28px; height:28px; }
     .checkout-card{ padding:22px; }
+    .size-summary-grid{ grid-template-columns:repeat(2,1fr); }
+    .size-howto{ flex-direction:column; text-align:center; }
+    .finger-row .nail-chip{ display:none; }
+    .finger-readout{ min-width:60px; }
     .info-card{ padding:20px; }
 
     .eyebrow{ font-size:.78rem; }
@@ -448,6 +481,7 @@
       <button data-nav="home">Home</button>
       <button data-nav="gallery">Gallery</button>
       <button data-nav="builder">Nail Builder</button>
+      <button data-nav="sizing">Find My Size</button>
       <button data-nav="account">Account</button>
       <button data-nav="contact">Contact</button>
     </nav>
@@ -506,9 +540,9 @@
         </div>
         <div class="how-step">
           <span class="how-num">2</span>
-          <svg class="how-icon" viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>
-          <h3>Free video fitting</h3>
-          <p>A quick video call to match your sizing and colour exactly, no studio visit required.</p>
+          <svg class="how-icon" viewBox="0 0 24 24"><rect x="2" y="9" width="20" height="6" rx="1"/><path d="M6 9v3M10 9v3M14 9v3M18 9v3"/></svg>
+          <h3>Find your fit</h3>
+          <p>Use our interactive sizing tool to get an accurate fit for every nail, no guesswork.</p>
         </div>
         <div class="how-step">
           <span class="how-num">3</span>
@@ -545,7 +579,7 @@
     </div>
 
     <section class="pane pane-tint">
-      <div class="pane-head">
+      <div class="pane-head" style="max-width:680px;margin-inline:auto;text-align:center;">
         <p class="eyebrow">Techniques</p>
         <h2>Every finish, done properly</h2>
       </div>
@@ -593,7 +627,7 @@
           <h2 style="margin-top:8px;">Ten years, one pair of hands, no compromises</h2>
           <p style="margin-top:14px;color:var(--ink-muted);max-width:52ch;">We trained across some of the industry's best studios before taking things fully remote in 2021. Every set is still made one at a time by hand &mdash; no factories, no rushed batches, just proper time spent getting your shape and finish exactly right before it's boxed up and posted out.</p>
           <p class="signature">&mdash; made by hand</p>
-          <div style="margin-top:20px;"><button class="btn btn-ghost" data-nav="contact">Book a free video fitting</button></div>
+          <div style="margin-top:20px;"><button class="btn btn-ghost" data-nav="sizing">Find your size</button></div>
         </div>
       </div>
     </section>
@@ -775,6 +809,46 @@
     </section>
   </section>
 
+  <!-- SIZING -->
+  <section class="screen" data-screen="sizing">
+    <section class="pane" style="border-bottom:0;">
+      <div class="pane-head">
+        <p class="eyebrow">Sizing</p>
+        <h2>Find your perfect fit</h2>
+        <p>Measure the width of each nail at its widest point and drag the sliders below until they match &mdash; we'll work out the right size instantly.</p>
+      </div>
+
+      <div class="size-howto">
+        <div class="size-howto-visual">
+          <div class="nail-chip shape-oval"><div class="base finish-glossy" style="background:var(--nude);"><div class="shine"></div></div></div>
+          <svg class="size-howto-arrow" viewBox="0 0 100 20" aria-hidden="true"><path d="M4 10 L96 10 M4 10 L14 4 M4 10 L14 16 M96 10 L86 4 M96 10 L86 16"/></svg>
+          <span class="size-howto-caption">cuticle to cuticle</span>
+        </div>
+        <p>Measure straight across the widest part of your natural nail bed, cuticle to cuticle, in millimetres &mdash; a soft tape measure or a printable sizing card both work.</p>
+      </div>
+
+      <div class="size-hands">
+        <div class="size-hand">
+          <h3>Left hand</h3>
+          <div id="leftHandFingers"></div>
+        </div>
+        <div class="size-hand">
+          <h3>Right hand</h3>
+          <div id="rightHandFingers"></div>
+        </div>
+      </div>
+
+      <div class="size-summary">
+        <h3>Your size profile</h3>
+        <div class="size-summary-grid" id="sizeSummaryGrid"></div>
+        <div class="size-summary-actions">
+          <button class="btn btn-ghost" id="saveSizeProfile" type="button">Save my sizes</button>
+          <button class="btn btn-primary btn-tip" data-nav="builder">Continue to Nail Builder</button>
+        </div>
+      </div>
+    </section>
+  </section>
+
   <!-- CONTACT -->
   <section class="screen" data-screen="contact">
     <section class="pane" style="border-bottom:0;">
@@ -793,13 +867,12 @@
             <p style="color:var(--ink-muted);font-size:.92rem;margin-top:6px;">+44 28 9000 1122 &middot; hello@shallynails.com</p>
             <table class="hours-table">
               <tr><td>Messages answered</td><td>Tue &ndash; Fri</td></tr>
-              <tr><td>Video fittings</td><td>Tue &ndash; Fri</td></tr>
               <tr><td>Weekends</td><td>Off the tools</td></tr>
             </table>
             <div class="social-row">
               <span class="chip">Instagram &middot; @shallynails</span>
             </div>
-            <div class="map-block">Free video fittings, booked around you</div>
+            <button class="map-block" data-nav="sizing" style="width:100%;border:1px solid var(--border);cursor:pointer;font-family:inherit;">Not sure on sizing? Try our fit finder</button>
           </div>
         </div>
       </div>
@@ -815,7 +888,7 @@
         <span class="brand-word" style="font-size:1.2rem;">Shally's Nail Sets</span>
         <p style="margin-top:10px;color:var(--ink-muted);font-size:.9rem;max-width:32ch;">Custom nails, designed online and posted to your door &mdash; no studio visit required.</p>
       </div>
-      <div><h4>Shop</h4><ul><li><button data-nav="gallery" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Gallery</button></li><li><button data-nav="builder" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Nail Builder</button></li><li><button data-nav="basket" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Basket</button></li></ul></div>
+      <div><h4>Shop</h4><ul><li><button data-nav="gallery" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Gallery</button></li><li><button data-nav="builder" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Nail Builder</button></li><li><button data-nav="sizing" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Find My Size</button></li><li><button data-nav="basket" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Basket</button></li></ul></div>
       <div><h4>Support</h4><ul><li><button data-nav="contact" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Contact</button></li><li><button data-nav="account" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;">Account</button></li></ul></div>
       <div><h4>Follow</h4><ul><li>Instagram</li><li>TikTok</li></ul></div>
     </div>
@@ -861,6 +934,18 @@
     {key:"lineart", label:"Hand-painted line art", price:7}
   ];
   var BASE_PRICE = 42;
+
+  var FINGERS = ["thumb","index","middle","ring","pinky"];
+  var FINGER_LABELS = {thumb:"Thumb", index:"Index", middle:"Middle", ring:"Ring", pinky:"Pinky"};
+  var DEFAULT_MM = {thumb:15.5, index:13, middle:13.5, ring:12.5, pinky:10};
+  var SIZE_BREAKPOINTS = [9.5,10.5,11.5,12.5,13.5,14.5,15.5,16.5,17.5,18.5];
+  var sizeState = {};
+
+  function mmToSize(mm){
+    for(var i=0;i<SIZE_BREAKPOINTS.length;i++){ if(mm < SIZE_BREAKPOINTS[i]) return i; }
+    return SIZE_BREAKPOINTS.length;
+  }
+  function mmToPx(mm){ return Math.round(30 + (mm-8)*4); }
 
   var GALLERY_ITEMS = [
     {id:"g1", name:"Classic French", cat:"Gel", price:32, shape:"oval", finish:"frenchtip", color:"#f3e9e2"},
@@ -1167,8 +1252,66 @@
     });
   });
 
+  // sizing
+  function fingerRowHTML(key, f, mm){
+    return '<div class="finger-row">' +
+      '<div class="nail-chip shape-oval" id="visual-'+key+'" style="width:'+mmToPx(mm)+'px;"><div class="base finish-glossy" style="background:var(--nude);"><div class="shine"></div></div></div>' +
+      '<div class="finger-info"><div class="finger-label">'+FINGER_LABELS[f]+'</div>' +
+      '<input type="range" min="8" max="20" step="0.5" value="'+mm+'" class="finger-slider" data-size-key="'+key+'"></div>' +
+      '<div class="finger-readout"><span class="mm-val" id="mm-'+key+'">'+mm.toFixed(1)+'mm</span>' +
+      '<span class="size-badge" id="size-'+key+'">Size '+mmToSize(mm)+'</span></div>' +
+    '</div>';
+  }
+  function renderSizingHands(){
+    var left = document.getElementById("leftHandFingers");
+    var right = document.getElementById("rightHandFingers");
+    if(!left || !right) return;
+    ["l","r"].forEach(function(hand){
+      var html = FINGERS.map(function(f){
+        var key = hand+"-"+f;
+        var mm = DEFAULT_MM[f];
+        sizeState[key] = mm;
+        return fingerRowHTML(key, f, mm);
+      }).join("");
+      (hand==="l" ? left : right).innerHTML = html;
+    });
+  }
+  function renderSizeSummary(){
+    var grid = document.getElementById("sizeSummaryGrid");
+    if(!grid) return;
+    var order = [];
+    ["l","r"].forEach(function(hand){ FINGERS.forEach(function(f){ order.push(hand+"-"+f); }); });
+    grid.innerHTML = order.map(function(key){
+      var parts = key.split("-");
+      var hand = parts[0]==="l" ? "L" : "R";
+      return '<div class="size-chip"><span>'+hand+' '+FINGER_LABELS[parts[1]]+'</span><strong>Size '+mmToSize(sizeState[key])+'</strong></div>';
+    }).join("");
+  }
+  document.addEventListener("input", function(e){
+    var s = e.target.closest("[data-size-key]");
+    if(!s) return;
+    var key = s.dataset.sizeKey;
+    var mm = parseFloat(s.value);
+    sizeState[key] = mm;
+    document.getElementById("mm-"+key).textContent = mm.toFixed(1)+"mm";
+    document.getElementById("size-"+key).textContent = "Size "+mmToSize(mm);
+    var visual = document.getElementById("visual-"+key);
+    if(visual) visual.style.width = mmToPx(mm)+"px";
+    renderSizeSummary();
+  });
+  var saveSizeBtn = document.getElementById("saveSizeProfile");
+  if(saveSizeBtn){
+    saveSizeBtn.addEventListener("click", function(){
+      var btn = this;
+      btn.textContent = "Saved ✓";
+      setTimeout(function(){ btn.textContent = "Save my sizes"; }, 2000);
+    });
+  }
+
   renderBuilderControls();
   renderBuilderPreview();
+  renderSizingHands();
+  renderSizeSummary();
   goTo("home");
 })();
 </script>
