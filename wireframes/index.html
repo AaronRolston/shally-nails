@@ -4,18 +4,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fffafb;
+    --bg:#fffefb;
     --surface:#ffffff;
-    --surface-sunk:#fdedf3;
+    --surface-sunk:#faf1de;
     --nude:#ecd7c4;
-    --ink:#43222e;
-    --ink-muted:#9c6e7c;
+    --ink:#2b241c;
+    --ink-muted:#8a7c6a;
     --lacquer:#e8497b;
     --lacquer-bright:#f16d97;
     --gold:#c79a5d;
-    --taupe:#f2cbd9;
+    --taupe:#e8dcc9;
     --border: color-mix(in srgb, var(--taupe) 60%, transparent);
-    --shadow: 0 1px 2px rgba(67,34,46,.05), 0 10px 22px -14px rgba(67,34,46,.14);
+    --shadow: 0 1px 2px rgba(43,36,28,.05), 0 10px 22px -14px rgba(43,36,28,.14);
     --radius-s: 10px;
     --radius-m: 16px;
     --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', serif;
@@ -25,25 +25,25 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#2b1620;
-      --surface:#391e2a;
-      --surface-sunk:#24121b;
+      --bg:#211a14;
+      --surface:#2e2318;
+      --surface-sunk:#241c12;
       --nude:#4a3627;
-      --ink:#fdeef2;
-      --ink-muted:#d69bb0;
+      --ink:#f7f0e6;
+      --ink-muted:#c7b8a0;
       --lacquer:#ff7fa6;
       --lacquer-bright:#ff9cbc;
       --gold:#e0b478;
-      --taupe:#6b3b4c;
+      --taupe:#4a3f30;
       --border: color-mix(in srgb, var(--taupe) 70%, transparent);
       --shadow: 0 1px 2px rgba(0,0,0,.25), 0 14px 28px -16px rgba(0,0,0,.45);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#2b1620; --surface:#391e2a; --surface-sunk:#24121b; --nude:#4a3627;
-    --ink:#fdeef2; --ink-muted:#d69bb0;
+    --bg:#211a14; --surface:#2e2318; --surface-sunk:#241c12; --nude:#4a3627;
+    --ink:#f7f0e6; --ink-muted:#c7b8a0;
     --lacquer:#ff7fa6; --lacquer-bright:#ff9cbc; --gold:#e0b478;
-    --taupe:#6b3b4c; --border: color-mix(in srgb, var(--taupe) 70%, transparent);
+    --taupe:#4a3f30; --border: color-mix(in srgb, var(--taupe) 70%, transparent);
     --shadow: 0 1px 2px rgba(0,0,0,.25), 0 14px 28px -16px rgba(0,0,0,.45);
   }
 
@@ -73,7 +73,7 @@
   .subscribe-row{ display:flex; gap:10px; max-width:420px; margin:0 auto; }
   .subscribe-row input{ flex:1; padding:13px 16px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--surface); color:var(--ink); font-family:inherit; }
 
-  .footer-strip{ margin-top:30px; padding:14px 20px; text-align:center; background:linear-gradient(90deg, var(--lacquer), var(--gold)); color:#fff8fb; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; font-weight:600; }
+  .footer-strip{ margin-top:30px; padding:14px 20px; text-align:center; background:linear-gradient(90deg, var(--gold), var(--lacquer-bright) 50%, var(--gold)); color:#fff8fb; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; font-weight:600; }
 
   *{box-sizing:border-box;}
   body{
@@ -197,8 +197,8 @@
 
   .bio-row{ display:grid; grid-template-columns:1fr 1.4fr; gap:40px; align-items:center; }
   .bio-frame{ aspect-ratio:4/5; border-radius:var(--radius-m); background:
-      radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--lacquer) 55%, var(--surface)) 0%, transparent 55%),
-      linear-gradient(155deg, var(--lacquer) 0%, var(--gold) 100%); box-shadow:var(--shadow); }
+      radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--lacquer) 35%, var(--surface)) 0%, transparent 45%),
+      linear-gradient(155deg, var(--gold) 0%, var(--nude) 100%); box-shadow:var(--shadow); }
 
   /* ---------- gallery ---------- */
   .chip-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px; }
@@ -238,7 +238,7 @@
 
   /* ---------- account ---------- */
   .account-shell{ display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden; box-shadow:var(--shadow); max-width:920px; margin-inline:auto; }
-  .account-art{ background:linear-gradient(165deg, var(--lacquer), var(--gold)); position:relative; min-height:100%; }
+  .account-art{ background:linear-gradient(165deg, var(--gold), var(--nude)); position:relative; min-height:100%; }
   .account-art .swatch-wall{ opacity:.35; }
   .account-form-side{ background:var(--surface); padding:40px; }
   .tab-row{ display:flex; gap:6px; margin-bottom:26px; background:var(--surface-sunk); padding:4px; border-radius:999px; }
