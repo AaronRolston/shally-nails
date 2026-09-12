@@ -30,11 +30,11 @@
   .hero-content h1 .script-accent{ font-size:1.15em; }
 
   .hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
-  .hero-collage{ position:relative; height:340px; }
-  .polaroid{ position:absolute; background:#fff; padding:14px 14px 30px; border-radius:6px; box-shadow:var(--shadow); width:56%; }
+  .hero-collage{ position:relative; height:380px; max-width:420px; margin-inline:auto; }
+  .polaroid{ position:absolute; background:#fff; padding:14px 14px 30px; border-radius:6px; box-shadow:var(--shadow); width:210px; }
   .polaroid .nail-chip{ width:100%; aspect-ratio:3/4; }
-  .polaroid-a{ top:0; left:4%; transform:rotate(-7deg); z-index:2; }
-  .polaroid-b{ top:74px; right:0; width:50%; transform:rotate(6deg); z-index:1; }
+  .polaroid-a{ top:0; left:0; transform:rotate(-7deg); z-index:2; }
+  .polaroid-b{ top:74px; right:0; width:180px; transform:rotate(6deg); z-index:1; }
   .polaroid-caption{ display:block; margin-top:8px; font-family:var(--font-script); font-size:1.1rem; color:var(--ink-muted); text-align:center; }
 
   .quicklinks{ display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin:40px 0 12px; }
@@ -251,7 +251,7 @@
   .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
   .field label{ font-size:.82rem; font-weight:600; color:var(--ink-muted); }
   .field input, .field textarea, .field select{
-    padding:12px 14px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--bg); color:var(--ink); font-family:inherit; font-size:.96rem;
+    padding:12px 14px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--bg); color:var(--ink); font-family:inherit; font-size:16px;
   }
   .field input:focus, .field textarea:focus{ border-color:var(--lacquer); }
   .form-foot{ margin-top:6px; font-size:.85rem; color:var(--ink-muted); text-align:center; }
@@ -357,7 +357,9 @@
     .account-art{ min-height:140px; }
     .summary-card, .preview-card{ position:static; }
     .footer-grid{ grid-template-columns:1fr 1fr; }
-    .hero-collage{ height:260px; margin-top:16px; }
+    .hero-collage{ height:350px; max-width:380px; margin-top:24px; }
+    .polaroid{ width:190px; }
+    .polaroid-b{ width:160px; }
     .how-row::before{ display:none; }
     .pane-feature{ padding:40px 24px; }
   }
@@ -368,8 +370,15 @@
     .header-row{ padding-block:10px; }
     .pane.pane-tint{ padding:32px 20px; border-radius:20px; }
     .pane.pane-feature{ padding:32px 20px; border-radius:22px; }
-    .hero-collage{ height:220px; }
+    .hero-collage{ height:310px; max-width:300px; }
+    .polaroid{ width:150px; }
+    .polaroid-b{ width:130px; }
     .subscribe-row{ flex-direction:column; }
+    .basket-item{ flex-wrap:wrap; row-gap:10px; }
+    .basket-item .item-info{ flex-basis:calc(100% - 68px); }
+    .qty-stepper button{ width:28px; height:28px; }
+    .checkout-card{ padding:22px; }
+    .info-card{ padding:20px; }
   }
 </style>
 
@@ -669,7 +678,7 @@
               <div class="nail-chip shape-almond"><div class="base finish-glossy" style="background:#e8497b"><div class="shine"></div></div></div>
               <h3 style="margin-top:16px;">Order confirmed</h3>
               <p style="color:var(--ink-muted);margin-top:6px;">A confirmation email is on its way &mdash; your set is next in line to be hand-finished and posted.</p>
-              <p class="order-no" id="orderNo">#RB-40218</p>
+              <p class="order-no" id="orderNo">#SH-40218</p>
               <button class="btn btn-primary" data-nav="home" style="margin-top:20px;">Back to home</button>
             </div>
           </div>
@@ -1016,7 +1025,7 @@
     });
     if(n===3){
       state.orderCounter += 1;
-      document.getElementById("orderNo").textContent = "#RB-"+state.orderCounter;
+      document.getElementById("orderNo").textContent = "#SH-"+state.orderCounter;
     }
   }
   document.addEventListener("click", function(e){
